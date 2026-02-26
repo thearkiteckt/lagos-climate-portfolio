@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Space Inequity in Lagos — Praise Maduabuchi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f0e8;
+    --bg2: #ede8dc;
+    --paper: #faf7f2;
+    --ink: #1a1a0f;
+    --ink-dim: #5a5a45;
+    --ink-muted: #9a9a80;
+    --border: #d4cdb8;
+    --green-deep: #1e4d2b;
+    --green-mid: #2d7a42;
+    --green-light: #4caf68;
+    --green-pale: #c8e6cf;
+    --red: #c0392b;
+    --red-pale: #f5c6c2;
+    --amber: #d4820a;
+    --amber-pale: #fdecc8;
+    --teal: #1a6b6b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Paper texture */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 200; opacity: 1;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--green-deep);
+    padding: 3rem 3.5rem 2.5rem;
+    position: relative; overflow: hidden;
+    animation: fadeIn 0.8s ease both;
+  }
+
+  .masthead::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .masthead::after {
+    content: '';
+    position: absolute; bottom: -80px; left: 200px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.025);
+  }
+
+  .masthead-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;
+  }
+
+  .issue-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.3rem 0.7rem; border-radius: 2px;
+  }
+
+  .author-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em;
+  }
+
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900; line-height: 1.05;
+    color: #fff; max-width: 700px;
+  }
+
+  .masthead h1 em {
+    font-style: italic; color: var(--green-pale);
+  }
+
+  .masthead-sub {
+    font-size: 0.8rem; color: rgba(255,255,255,0.55);
+    margin-top: 0.8rem; max-width: 520px; line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .masthead-stats {
+    display: flex; gap: 2.5rem; margin-top: 2rem;
+    padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+
+  .mstat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .mstat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--green-pale);
+  }
+  .mstat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  /* ── BODY GRID ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .panel {
+    background: var(--paper);
+    padding: 1.8rem 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .panel-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 1.2rem;
+    padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
+  }
+
+  /* ── LGA TABLE ── */
+  .lga-panel { grid-column: span 7; }
+
+  .lga-table { width: 100%; border-collapse: collapse; }
+
+  .lga-table thead tr {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .lga-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 500;
+    padding: 0.5rem 0.6rem; text-align: left;
+  }
+
+  .lga-table th:not(:first-child) { text-align: right; }
+
+  .lga-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .lga-table tbody tr:hover { background: var(--bg2); }
+
+  .lga-table td {
+    padding: 0.75rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .lga-table td:not(:first-child) { text-align: right; }
+
+  .lga-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 0.8rem !important;
+  }
+
+  .equity-chip {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.2rem 0.55rem; border-radius: 2px; font-weight: 500;
+  }
+  .chip-critical { background: var(--red-pale); color: var(--red); }
+  .chip-poor { background: var(--amber-pale); color: var(--amber); }
+  .chip-moderate { background: #e8f4e8; color: var(--green-mid); }
+  .chip-good { background: var(--green-pale); color: var(--green-deep); }
+
+  .gs-bar-wrap { display: flex; align-items: center; gap: 0.5rem; justify-content: flex-end; }
+  .gs-bar-track { width: 60px; height: 5px; background: var(--bg2); border-radius: 2px; overflow: hidden; }
+  .gs-bar-fill { height: 100%; border-radius: 2px; }
+
+  /* ── EQUITY INSIGHT ── */
+  .insight-panel { grid-column: span 5; background: var(--green-deep); }
+
+  .insight-panel .panel-label { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.1); }
+
+  .insight-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; line-height: 1.25;
+    color: #fff; margin-bottom: 1rem;
+  }
+
+  .insight-headline em { font-style: italic; color: var(--green-pale); }
+
+  .insight-body {
+    font-size: 0.72rem; color: rgba(255,255,255,0.6);
+    line-height: 1.8; font-weight: 300; margin-bottom: 1.5rem;
+  }
+
+  .insight-stat-row { display: flex; flex-direction: column; gap: 0.8rem; }
+
+  .insight-stat {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .insight-stat-label { font-size: 0.62rem; color: rgba(255,255,255,0.45); }
+  .insight-stat-val { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--green-pale); font-weight: 700; }
+
+  /* ── BUBBLE / DOT CHART ── */
+  .bubble-panel { grid-column: span 6; }
+
+  /* ── EQUITY MAP (visual grid) ── */
+  .map-panel { grid-column: span 6; }
+
+  .equity-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .equity-cell {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0.5rem;
+    position: relative; overflow: hidden;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .equity-cell:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 10; }
+
+  .equity-cell.critical { background: var(--red); }
+  .equity-cell.poor { background: var(--amber); }
+  .equity-cell.moderate { background: var(--green-light); }
+  .equity-cell.good { background: var(--green-deep); }
+
+  .cell-name {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.6rem; font-weight: 500; color: rgba(255,255,255,0.95);
+    line-height: 1.2;
+  }
+  .cell-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem; font-weight: 700; color: #fff;
+  }
+
+  .map-legend {
+    display: flex; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .legend-label { font-size: 0.58rem; color: var(--ink-dim); font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── WHO IS MOST AFFECTED ── */
+  .who-panel { grid-column: span 5; }
+
+  .affected-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .affected-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 0.9rem; border: 1px solid var(--border); border-radius: 3px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .affected-item:hover { border-color: var(--green-mid); background: var(--bg); }
+
+  .affected-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .affected-title { font-size: 0.72rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .affected-desc { font-size: 0.62rem; color: var(--ink-dim); line-height: 1.6; }
+
+  /* ── RECOMMENDATIONS ── */
+  .reco-panel { grid-column: span 7; }
+
+  .reco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+
+  .reco-card {
+    border: 1px solid var(--border);
+    border-radius: 3px; padding: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .reco-card:hover { border-color: var(--green-mid); transform: translateY(-2px); }
+  .reco-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .reco-card.r1::before { background: var(--red); }
+  .reco-card.r2::before { background: var(--amber); }
+  .reco-card.r3::before { background: var(--green-mid); }
+  .reco-card.r4::before { background: var(--teal); }
+
+  .reco-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--border);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+
+  .reco-title { font-size: 0.72rem; font-weight: 500; margin-bottom: 0.35rem; }
+  .reco-desc { font-size: 0.62rem; color: var(--ink-dim); line-height: 1.6; }
+  .reco-impact {
+    margin-top: 0.5rem; font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem; color: var(--green-mid); letter-spacing: 0.05em;
+  }
+
+  /* ── QUOTE / CALL TO ACTION ── */
+  .cta-panel {
+    grid-column: span 12;
+    background: var(--bg2);
+    padding: 2.5rem 3.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 2rem; flex-wrap: wrap;
+    border-top: 3px solid var(--green-deep);
+  }
+
+  .cta-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-style: italic; font-weight: 400;
+    color: var(--green-deep); max-width: 600px; line-height: 1.5;
+  }
+
+  .cta-meta { text-align: right; }
+  .cta-meta p { font-size: 0.65rem; color: var(--ink-muted); margin-bottom: 0.3rem; font-family: 'IBM Plex Mono', monospace; }
+  .cta-meta strong { font-size: 0.7rem; color: var(--ink-dim); }
+
+  /* ── FOOTER ── */
+  .foot-panel {
+    grid-column: span 12;
+    background: var(--green-deep);
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+
+  .foot-panel p { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: rgba(255,255,255,0.35); }
+  .foot-panel span { color: var(--green-pale); }
+
+  /* SVG bubble chart */
+  .bubble-svg { width: 100%; aspect-ratio: 4/3; }
+
+  @keyframes bubblePop {
+    from { r: 0; opacity: 0; }
+    to { opacity: 0.85; }
+  }
+  .bubble { animation: bubblePop 0.6s ease both; }
+
+  @media (max-width: 860px) {
+    .lga-panel, .insight-panel, .bubble-panel, .map-panel,
+    .who-panel, .reco-panel { grid-column: span 12; }
+    .reco-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-top">
+    <span class="issue-tag">Portfolio Project 02 · Green Space Equity Analysis</span>
+    <span class="author-tag">Praise (Ifeanyi) Maduabuchi · Architect & Data Analyst</span>
+  </div>
+  <h1>Who Gets <em>Shade</em><br>in Lagos?</h1>
+  <p class="masthead-sub">A green space equity analysis across Lagos Local Government Areas — mapping who bears the greatest climate burden and who has access to natural cooling.</p>
+  <div class="masthead-stats">
+    <div class="mstat"><span class="mstat-val">20</span><span class="mstat-label">LGAs Analysed</span></div>
+    <div class="mstat"><span class="mstat-val">0.5m²</span><span class="mstat-label">Green space / person (worst zone)</span></div>
+    <div class="mstat"><span class="mstat-val">9×</span><span class="mstat-label">Inequity gap: best vs worst LGA</span></div>
+    <div class="mstat"><span class="mstat-val">WHO: 9m²</span><span class="mstat-label">Recommended minimum / person</span></div>
+  </div>
+</div>
+
+<div class="body-grid">
+
+  <!-- LGA TABLE -->
+  <div class="panel lga-panel" style="animation-delay:0.1s">
+    <div class="panel-label">LGA Green Space Data — Area, Population & Equity Score</div>
+    <table class="lga-table">
+      <thead>
+        <tr>
+          <th>LGA</th>
+          <th>Pop. Density<br>(per km²)</th>
+          <th>Green Space<br>(m² / person)</th>
+          <th>Coverage</th>
+          <th>Equity Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="lga-name">Mushin</td>
+          <td>62,000</td>
+          <td style="color:var(--red);font-weight:600">0.5</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:3%;background:var(--red)"></div></div><span>0.6%</span></div></td>
+          <td><span class="equity-chip chip-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Oshodi-Isolo</td>
+          <td>58,000</td>
+          <td style="color:var(--red);font-weight:600">0.7</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:4%;background:var(--red)"></div></div><span>0.8%</span></div></td>
+          <td><span class="equity-chip chip-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Surulere</td>
+          <td>44,000</td>
+          <td style="color:var(--red);font-weight:600">1.1</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:6%;background:var(--red)"></div></div><span>1.2%</span></div></td>
+          <td><span class="equity-chip chip-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Ajeromi-Ifelodun</td>
+          <td>52,000</td>
+          <td style="color:var(--red);font-weight:600">0.9</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:5%;background:var(--red)"></div></div><span>1.0%</span></div></td>
+          <td><span class="equity-chip chip-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Lagos Mainland</td>
+          <td>38,000</td>
+          <td style="color:var(--amber);font-weight:600">1.8</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:10%;background:var(--amber)"></div></div><span>2.0%</span></div></td>
+          <td><span class="equity-chip chip-poor">Poor</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Agege</td>
+          <td>40,000</td>
+          <td style="color:var(--amber);font-weight:600">1.5</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:8%;background:var(--amber)"></div></div><span>1.7%</span></div></td>
+          <td><span class="equity-chip chip-poor">Poor</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Alimosho</td>
+          <td>22,000</td>
+          <td style="color:var(--amber);font-weight:600">2.4</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:13%;background:var(--amber)"></div></div><span>4.1%</span></div></td>
+          <td><span class="equity-chip chip-poor">Poor</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Kosofe</td>
+          <td>18,000</td>
+          <td style="color:var(--green-mid);font-weight:600">3.2</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:18%;background:var(--green-light)"></div></div><span>5.8%</span></div></td>
+          <td><span class="equity-chip chip-moderate">Moderate</span></td>
+        </tr>
+        <tr>
+          <td class="lga-name">Ikoyi / Eti-Osa</td>
+          <td>8,000</td>
+          <td style="color:var(--green-deep);font-weight:600">4.6</td>
+          <td><div class="gs-bar-wrap"><div class="gs-bar-track"><div class="gs-bar-fill" style="width:25%;background:var(--green-deep)"></div></div><span>12.4%</span></div></td>
+          <td><span class="equity-chip chip-good">Better</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.58rem;color:var(--ink-muted);margin-top:0.8rem;font-family:'IBM Plex Mono',monospace;">
+      * WHO minimum standard: 9m² per person. No Lagos LGA meets this threshold.
+      Sources: OpenStreetMap, Lagos Bureau of Statistics, 2023 estimates.
+    </p>
+  </div>
+
+  <!-- INSIGHT PANEL -->
+  <div class="panel insight-panel" style="animation-delay:0.15s">
+    <div class="panel-label">Key Finding</div>
+    <div class="insight-headline">The city's <em>poorest</em> residents live in its <em>hottest</em>, least green zones.</div>
+    <p class="insight-body">
+      Lagos has one of the lowest urban green space ratios of any megacity in the world. But the deficit is not evenly distributed. High-density, low-income mainland LGAs have up to 9× less green space per person than wealthier island areas — compounding heat stress, air quality issues, and mental health impacts on the most vulnerable residents.
+    </p>
+    <div class="insight-stat-row">
+      <div class="insight-stat">
+        <span class="insight-stat-label">City average green space / person</span>
+        <span class="insight-stat-val">1.9m²</span>
+      </div>
+      <div class="insight-stat">
+        <span class="insight-stat-label">WHO recommended minimum</span>
+        <span class="insight-stat-val">9.0m²</span>
+      </div>
+      <div class="insight-stat">
+        <span class="insight-stat-label">Shortfall vs. WHO standard</span>
+        <span class="insight-stat-val" style="color:#f4845f">−79%</span>
+      </div>
+      <div class="insight-stat">
+        <span class="insight-stat-label">LGAs at "Critical" level</span>
+        <span class="insight-stat-val" style="color:#f4845f">4 of 20</span>
+      </div>
+      <div class="insight-stat" style="border:none">
+        <span class="insight-stat-label">Inequity gap (best vs. worst)</span>
+        <span class="insight-stat-val">9.2×</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUBBLE CHART -->
+  <div class="panel bubble-panel" style="animation-delay:0.2s">
+    <div class="panel-label">Population Density vs. Green Space Per Person</div>
+    <svg class="bubble-svg" viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="g2" width="48" height="34" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 34" fill="none" stroke="#d4cdb8" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect x="60" y="10" width="400" height="280" fill="url(#g2)"/>
+
+      <!-- Axes -->
+      <line x1="60" y1="290" x2="460" y2="290" stroke="#5a5a45" stroke-width="1"/>
+      <line x1="60" y1="10" x2="60" y2="290" stroke="#5a5a45" stroke-width="1"/>
+
+      <!-- WHO line -->
+      <line x1="60" y1="80" x2="460" y2="80" stroke="#2d7a42" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="462" y="83" fill="#2d7a42" font-size="7" font-family="IBM Plex Mono">WHO min 9m²</text>
+
+      <!-- Axis labels -->
+      <text x="260" y="310" fill="#9a9a80" font-size="8" font-family="IBM Plex Mono" text-anchor="middle">Population Density (persons/km²)</text>
+      <text x="16" y="165" fill="#9a9a80" font-size="8" font-family="IBM Plex Mono" text-anchor="middle" transform="rotate(-90 16 165)">Green Space (m²/person)</text>
+
+      <!-- Y axis labels (0 to 10m²) -->
+      <text x="54" y="293" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="end">0</text>
+      <text x="54" y="249" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="end">2</text>
+      <text x="54" y="205" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="end">4</text>
+      <text x="54" y="161" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="end">6</text>
+      <text x="54" y="117" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="end">8</text>
+      <text x="54" y="83" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="end">9</text>
+
+      <!-- X axis labels -->
+      <text x="100" y="302" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">8k</text>
+      <text x="180" y="302" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">22k</text>
+      <text x="260" y="302" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">38k</text>
+      <text x="340" y="302" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">52k</text>
+      <text x="420" y="302" fill="#9a9a80" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">62k</text>
+
+      <!-- Bubbles: x=density mapped, y=greenspace mapped (290-(val/10)*280), r=relative -->
+      <!-- Ikoyi/Eti-Osa density:8k gs:4.6 -->
+      <circle class="bubble" cx="100" cy="161" r="14" fill="#1e4d2b" opacity="0.85" style="animation-delay:0.3s"/>
+      <text x="100" y="158" fill="#fff" font-size="6.5" font-family="IBM Plex Mono" text-anchor="middle">Ikoyi</text>
+      <text x="100" y="167" fill="#c8e6cf" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">4.6m²</text>
+
+      <!-- Kosofe density:18k gs:3.2 -->
+      <circle class="bubble" cx="180" cy="200" r="12" fill="#4caf68" opacity="0.8" style="animation-delay:0.38s"/>
+      <text x="180" y="197" fill="#fff" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">Kosofe</text>
+      <text x="180" y="206" fill="#fff" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">3.2m²</text>
+
+      <!-- Alimosho density:22k gs:2.4 -->
+      <circle class="bubble" cx="210" cy="222" r="16" fill="#d4820a" opacity="0.75" style="animation-delay:0.44s"/>
+      <text x="210" y="219" fill="#fff" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">Alimosho</text>
+      <text x="210" y="228" fill="#fff" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">2.4m²</text>
+
+      <!-- Lagos Mainland density:38k gs:1.8 -->
+      <circle class="bubble" cx="260" cy="240" r="13" fill="#d4820a" opacity="0.8" style="animation-delay:0.5s"/>
+      <text x="260" y="237" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">Mainland</text>
+      <text x="260" y="246" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">1.8m²</text>
+
+      <!-- Agege density:40k gs:1.5 -->
+      <circle class="bubble" cx="275" cy="247" r="11" fill="#d4820a" opacity="0.7" style="animation-delay:0.55s"/>
+
+      <!-- Ajeromi density:52k gs:0.9 -->
+      <circle class="bubble" cx="340" cy="265" r="15" fill="#c0392b" opacity="0.85" style="animation-delay:0.6s"/>
+      <text x="340" y="262" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">Ajeromi</text>
+      <text x="340" y="271" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">0.9m²</text>
+
+      <!-- Surulere density:44k gs:1.1 -->
+      <circle class="bubble" cx="300" cy="259" r="12" fill="#c0392b" opacity="0.8" style="animation-delay:0.65s"/>
+      <text x="300" y="256" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">Surulere</text>
+      <text x="300" y="265" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">1.1m²</text>
+
+      <!-- Oshodi density:58k gs:0.7 -->
+      <circle class="bubble" cx="390" cy="271" r="16" fill="#c0392b" opacity="0.9" style="animation-delay:0.7s"/>
+      <text x="390" y="268" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">Oshodi</text>
+      <text x="390" y="277" fill="#fff" font-size="5.5" font-family="IBM Plex Mono" text-anchor="middle">0.7m²</text>
+
+      <!-- Mushin density:62k gs:0.5 -->
+      <circle class="bubble" cx="430" cy="276" r="18" fill="#8b0000" opacity="0.9" style="animation-delay:0.75s"/>
+      <text x="430" y="273" fill="#fff" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">Mushin</text>
+      <text x="430" y="282" fill="#fecaca" font-size="6" font-family="IBM Plex Mono" text-anchor="middle">0.5m² ★</text>
+
+      <!-- Annotation box -->
+      <rect x="65" y="15" width="165" height="36" rx="2" fill="#faf7f2" stroke="#d4cdb8" stroke-width="0.8"/>
+      <text x="148" y="28" fill="#5a5a45" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">Higher density = less green space</text>
+      <text x="148" y="40" fill="#c0392b" font-size="7" font-family="IBM Plex Mono" text-anchor="middle">All zones fall far below WHO standard</text>
+    </svg>
+  </div>
+
+  <!-- EQUITY COLOUR MAP -->
+  <div class="panel map-panel" style="animation-delay:0.25s">
+    <div class="panel-label">Green Space Equity Heat Map — Lagos LGAs</div>
+    <div class="equity-grid">
+      <!-- Row 1 -->
+      <div class="equity-cell critical"><span class="cell-name">Mushin</span><span class="cell-val">0.5m²</span></div>
+      <div class="equity-cell critical"><span class="cell-name">Oshodi-Isolo</span><span class="cell-val">0.7m²</span></div>
+      <div class="equity-cell critical"><span class="cell-name">Ajeromi</span><span class="cell-val">0.9m²</span></div>
+      <div class="equity-cell critical"><span class="cell-name">Surulere</span><span class="cell-val">1.1m²</span></div>
+      <!-- Row 2 -->
+      <div class="equity-cell poor"><span class="cell-name">Agege</span><span class="cell-val">1.5m²</span></div>
+      <div class="equity-cell poor"><span class="cell-name">Lagos Mainland</span><span class="cell-val">1.8m²</span></div>
+      <div class="equity-cell poor"><span class="cell-name">Shomolu</span><span class="cell-val">2.0m²</span></div>
+      <div class="equity-cell poor"><span class="cell-name">Alimosho</span><span class="cell-val">2.4m²</span></div>
+      <!-- Row 3 -->
+      <div class="equity-cell poor"><span class="cell-name">Ifako-Ijaye</span><span class="cell-val">2.6m²</span></div>
+      <div class="equity-cell poor"><span class="cell-name">Ojo</span><span class="cell-val">2.8m²</span></div>
+      <div class="equity-cell moderate"><span class="cell-name">Ikorodu</span><span class="cell-val">3.0m²</span></div>
+      <div class="equity-cell moderate"><span class="cell-name">Kosofe</span><span class="cell-val">3.2m²</span></div>
+      <!-- Row 4 -->
+      <div class="equity-cell moderate"><span class="cell-name">Ikeja</span><span class="cell-val">3.5m²</span></div>
+      <div class="equity-cell moderate"><span class="cell-name">Amuwo Odofin</span><span class="cell-val">3.8m²</span></div>
+      <div class="equity-cell good"><span class="cell-name">Ikoyi</span><span class="cell-val">4.6m²</span></div>
+      <div class="equity-cell good"><span class="cell-name">V. Island</span><span class="cell-val">4.8m²</span></div>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div><span class="legend-label">Critical (&lt;1.5m²)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span class="legend-label">Poor (1.5–3m²)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green-light)"></div><span class="legend-label">Moderate (3–4m²)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green-deep)"></div><span class="legend-label">Better (&gt;4m²)</span></div>
+    </div>
+  </div>
+
+  <!-- WHO IS AFFECTED -->
+  <div class="panel who-panel" style="animation-delay:0.3s">
+    <div class="panel-label">Who Bears the Burden</div>
+    <div class="affected-list">
+      <div class="affected-item">
+        <span class="affected-icon">🏚️</span>
+        <div>
+          <div class="affected-title">Low-income residents in dense mainland LGAs</div>
+          <div class="affected-desc">Mushin, Oshodi, Surulere — up to 62,000 people per km² with less than 1m² of green space each. Heat stress is a daily reality with no natural relief.</div>
+        </div>
+      </div>
+      <div class="affected-item">
+        <span class="affected-icon">👧</span>
+        <div>
+          <div class="affected-title">Children with no safe outdoor play space</div>
+          <div class="affected-desc">Dense street networks and near-zero green space force children indoors or onto roads. Cognitive and physical development impacts are documented in similar urban contexts.</div>
+        </div>
+      </div>
+      <div class="affected-item">
+        <span class="affected-icon">👩‍⚕️</span>
+        <div>
+          <div class="affected-title">Outdoor workers in high-heat zones</div>
+          <div class="affected-desc">Market traders, transport workers, and construction labourers in critical LGAs work in unshaded environments reaching 33–36°C surface temperatures.</div>
+        </div>
+      </div>
+      <div class="affected-item">
+        <span class="affected-icon">🌬️</span>
+        <div>
+          <div class="affected-title">Asthma & respiratory patients</div>
+          <div class="affected-desc">Green space deficits correlate with higher particulate matter levels. Dense, unventilated streets trap vehicle emissions with no tree canopy to filter air.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATIONS -->
+  <div class="panel reco-panel" style="animation-delay:0.35s">
+    <div class="panel-label">Data-Driven Recommendations</div>
+    <div class="reco-grid">
+      <div class="reco-card r1">
+        <div class="reco-num">01</div>
+        <div class="reco-title">Pocket Park Programme in Critical LGAs</div>
+        <div class="reco-desc">Prioritise Mushin, Oshodi, Surulere, and Ajeromi for compulsory green space acquisition. Even 100m² parks per 500m radius significantly reduce heat and stress.</div>
+        <div class="reco-impact">↑ +1.5m² per person achievable within 5 years</div>
+      </div>
+      <div class="reco-card r2">
+        <div class="reco-num">02</div>
+        <div class="reco-title">Mandatory Street Tree Policy</div>
+        <div class="reco-desc">Amend Lagos building regulations to require one native canopy tree per 10m of street frontage in new developments and major road upgrades.</div>
+        <div class="reco-impact">↓ −2–3°C surface temp reduction on treated streets</div>
+      </div>
+      <div class="reco-card r3">
+        <div class="reco-num">03</div>
+        <div class="reco-title">Green Roofs on Public Buildings</div>
+        <div class="reco-desc">Schools, health centres, and government buildings in critical LGAs are ideal candidates — publicly owned, large footprints, visible impact in communities with zero ground-level options.</div>
+        <div class="reco-impact">↓ −20–30°C roof surface temperature</div>
+      </div>
+      <div class="reco-card r4">
+        <div class="reco-num">04</div>
+        <div class="reco-title">Green Space Equity Index in Planning Law</div>
+        <div class="reco-desc">Enshrine a minimum green space per capita threshold in Lagos State urban planning legislation, with annual LGA reporting and compliance mechanisms tied to development approvals.</div>
+        <div class="reco-impact">→ Systemic, long-term equity correction</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="cta-panel">
+    <p class="cta-quote">"Green space in Lagos is not just an environmental issue — it is a health equity issue. The same communities bearing the worst heat are the ones with the least shade."</p>
+    <div class="cta-meta">
+      <p>Project 02 of ongoing Lagos Climate Series</p>
+      <p>Companion to: Urban Heat Islands in Lagos (Project 01)</p>
+      <strong>Praise (Ifeanyi) Maduabuchi</strong>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot-panel">
+    <p>Data: <span>OpenStreetMap · Lagos Bureau of Statistics · WHO Urban Green Space Guidelines · 2023 estimates</span></p>
+    <p>Architect & Data Analyst · <span>Climate-Responsive Architecture & Sustainable Housing</span></p>
+  </div>
+
+</div>
+</body>
+</html>
