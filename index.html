@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praise Maduabuchi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e1410;
+    --green-deep: #1e4d2b;
+    --green-bright: #7dc484;
+    --green-pale: #c8e6cf;
+    --text: #d4e8d6;
+    --text-dim: #6e8f70;
+    --text-muted: #3d5a3f;
+    --border: #2a3d2c;
+    --coral: #f4845f;
+    --teal: #4ecdc4;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .container {
+    max-width: 680px;
+    width: 100%;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green-bright); margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 900; line-height: 1.05; color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em { font-style: italic; color: var(--green-pale); }
+
+  .tagline {
+    font-size: 0.85rem; color: var(--text-dim);
+    font-weight: 300; line-height: 1.7;
+    margin-bottom: 2.5rem; max-width: 480px;
+  }
+
+  .divider {
+    width: 48px; height: 2px;
+    background: var(--green-bright);
+    margin-bottom: 2.5rem;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 1rem;
+  }
+
+  .projects { display: flex; flex-direction: column; gap: 1px; margin-bottom: 2.5rem; }
+
+  .project-card {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 1.4rem 1.6rem;
+    background: #141c15;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+
+  .project-card:hover {
+    border-color: var(--green-bright);
+    background: #1a2418;
+    transform: translateX(4px);
+  }
+
+  .project-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem; color: var(--text-muted); letter-spacing: 0.15em;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: #fff; line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.7rem; color: var(--text-dim); line-height: 1.7; font-weight: 300;
+  }
+
+  .project-tags {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.3rem;
+  }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.2rem 0.55rem; border-radius: 2px;
+    border: 1px solid var(--border); color: var(--text-dim);
+  }
+
+  .tag.hot { border-color: rgba(244,132,95,0.4); color: var(--coral); }
+  .tag.cool { border-color: rgba(78,205,196,0.4); color: var(--teal); }
+  .tag.green { border-color: rgba(125,196,132,0.4); color: var(--green-bright); }
+
+  .arrow {
+    margin-left: auto; font-size: 0.8rem; color: var(--text-muted);
+    align-self: flex-end; transition: color 0.2s, transform 0.2s;
+  }
+  .project-card:hover .arrow { color: var(--green-bright); transform: translateX(4px); }
+
+  .project-row { display: flex; justify-content: space-between; align-items: flex-start; }
+
+  .skills-row {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .skill-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.08em;
+    padding: 0.3rem 0.7rem; border-radius: 2px;
+    background: #141c15; border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .contact-row {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    padding-top: 1.5rem; border-top: 1px solid var(--border);
+  }
+
+  .contact-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; color: var(--text-dim); text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--green-bright); }
+
+  .available-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--green-bright);
+    border: 1px solid rgba(125,196,132,0.3);
+    padding: 0.3rem 0.8rem; border-radius: 2px;
+    margin-bottom: 2rem;
+    background: rgba(125,196,132,0.06);
+  }
+
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green-bright);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <p class="eyebrow">Data Analytics × Climate-Responsive Architecture</p>
+  <h1>Praise<br><em>Maduabuchi</em></h1>
+  <p class="tagline">Architect and data analyst specialising in climate resilience and sustainable housing in African cities. I use satellite data and spatial analysis to understand how cities heat up — and what we can do about it.</p>
+
+  <div class="available-badge">
+    <span class="dot"></span>
+    Available for research, analytics & design roles
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="section-label">Projects — Lagos Climate Series</p>
+  <div class="projects">
+
+    <a class="project-card" href="lagos_uhi_dashboard.html">
+      <div class="project-row">
+        <span class="project-num">Project 01</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="project-title">Urban Heat Islands in Lagos:<br>Why Some Neighbourhoods Are Hotter</div>
+      <p class="project-desc">129 satellite images. 15 zones. 4-week analysis identifying Lagos's hottest neighbourhoods, quantifying the four heat drivers, and modelling an 8°C reduction pathway for Oshodi.</p>
+      <div class="project-tags">
+        <span class="tag hot">Landsat / MODIS</span>
+        <span class="tag hot">NDVI Analysis</span>
+        <span class="tag hot">Surface Temperature</span>
+        <span class="tag hot">Urban Heat Islands</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="lagos_greenspace_dashboard.html">
+      <div class="project-row">
+        <span class="project-num">Project 02</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="project-title">Who Gets Shade?<br>Green Space Inequity Across Lagos LGAs</div>
+      <p class="project-desc">Mapping green space per capita across 20 Lagos LGAs against WHO standards. Mushin has 0.5m² per person — an 18× gap from the global minimum. A climate equity crisis hiding in plain sight.</p>
+      <div class="project-tags">
+        <span class="tag green">OpenStreetMap</span>
+        <span class="tag green">Spatial Equity</span>
+        <span class="tag green">WHO Standards</span>
+        <span class="tag green">Urban Planning</span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="section-label">Skills</p>
+  <div class="skills-row">
+    <span class="skill-chip">Satellite Imagery</span>
+    <span class="skill-chip">NDVI Analysis</span>
+    <span class="skill-chip">Spatial Data</span>
+    <span class="skill-chip">Data Visualisation</span>
+    <span class="skill-chip">Urban Heat Analysis</span>
+    <span class="skill-chip">OpenStreetMap</span>
+    <span class="skill-chip">Climate Research</span>
+    <span class="skill-chip">Architectural Design</span>
+    <span class="skill-chip">Passive Cooling</span>
+    <span class="skill-chip">Policy Writing</span>
+    <span class="skill-chip">Sustainable Housing</span>
+    <span class="skill-chip">Research & Reporting</span>
+  </div>
+
+  <div class="contact-row">
+    <a class="contact-link" href="mailto:maduabuchipraizz@gmail.com">✉ maduabuchipraizz@gmail.com</a>
+    <a class="contact-link" href="https://www.linkedin.com/in/praise-maduabuchi-003200222" target="_blank">↗ LinkedIn</a>
+    <span class="contact-link">📍 Abuja, Nigeria · Open to remote</span>
+  </div>
+
+</div>
+</body>
+</html>
